@@ -9,6 +9,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+/Multplayer_Test/Library/PackageCache/com.unity.burst@1.8.12/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
