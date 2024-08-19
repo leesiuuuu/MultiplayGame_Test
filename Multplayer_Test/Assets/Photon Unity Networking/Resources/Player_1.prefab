@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 8280150635189525045}
   - component: {fileID: 8170209757273458379}
   - component: {fileID: 6246769037496296302}
+  - component: {fileID: -1065777185123450761}
   m_Layer: 0
   m_Name: Player_1
   m_TagString: Untagged
@@ -645,13 +646,13 @@ MonoBehaviour:
     Name: isRunning
   - Type: 9
     SynchronizeType: 0
-    Name: Attack
-  - Type: 9
-    SynchronizeType: 0
     Name: Attack2
   - Type: 4
     SynchronizeType: 1
     Name: isJumping
+  - Type: 9
+    SynchronizeType: 0
+    Name: Attack1
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -670,6 +671,19 @@ MonoBehaviour:
   photonView: {fileID: 1955731597708537660}
   BubbleSpeechobject: {fileID: 472394628011807669}
   updatedText: {fileID: 3408929941884809539}
+--- !u!114 &-1065777185123450761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3949458450599968862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ffbf4f8317a3c340a9efa284ca1f861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4036590351229264452}
 --- !u!1 &8477205901810198861
 GameObject:
   m_ObjectHideFlags: 0

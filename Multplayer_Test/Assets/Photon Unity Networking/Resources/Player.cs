@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -69,19 +70,13 @@ public class Player : Photon.MonoBehaviour
         {
             if (ComboCount == 0)
             {
-                anim.SetBool("Attack", true);
-                anim.SetBool("Attack2", false);
-            }
-            else if(ComboCount == 1)
-            {
-                anim.SetBool("Attack2", true);
-                anim.SetBool("Attack", false);
+                anim.SetTrigger("Attack2");
+                anim.ResetTrigger("Attack1");
             }
             else
             {
-                anim.SetBool("Attack2", false);
-                anim.SetBool("Attack", false);
-                ComboCount = 0;
+                anim.SetTrigger("Attack1");
+                anim.ResetTrigger("Attack2");
             }
                 
         }
@@ -123,6 +118,9 @@ public class Player : Photon.MonoBehaviour
     [PunRPC]
     private void Attack()
     {
-        ComboCount++;
+        if (ComboCount == 0)
+            ++ComboCount;
+        else
+            --ComboCount;
     }
 }
