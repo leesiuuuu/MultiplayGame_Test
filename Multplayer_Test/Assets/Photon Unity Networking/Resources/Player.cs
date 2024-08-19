@@ -11,11 +11,13 @@ public class Player : Photon.MonoBehaviour
     public GameObject PlayerCamera;
     public SpriteRenderer sr;
     public Text PlayerNameText;
+    public Collider2D AtkCollider;
 
     public bool IsGrounded = false;
     public float MoveSpeed;
     public float JumpForce;
 
+    private int ComboCount = 0;
     private void Awake()
     {
         if (photonView.isMine)
@@ -40,6 +42,7 @@ public class Player : Photon.MonoBehaviour
     {
         var move = new Vector3(Input.GetAxisRaw("Horizontal"), 0);
         transform.position += move * MoveSpeed * Time.deltaTime;
+        //움직임 코드
         if (Input.GetKeyDown(KeyCode.A))
         {
             photonView.RPC("FlipTrue", PhotonTargets.AllBuffered);
@@ -48,13 +51,39 @@ public class Player : Photon.MonoBehaviour
         {
             photonView.RPC("FlipFalse", PhotonTargets.AllBuffered);
         }
+        //점프 코드
         if (Input.GetKeyDown(KeyCode.Space) && !IsGrounded)
         {
             photonView.RPC("Jump", PhotonTargets.AllBuffered);
         }
+        if (Input.GetKeyDown(KeyCode.J) && !IsGrounded)
+        {
+            photonView.RPC("Attack", PhotonTargets.AllBuffered);
+        }
+        //애니메이션 코드
         if (IsGrounded && Input.GetKey(KeyCode.Space))
         {
             anim.SetBool("isJumping", true);
+        }
+        if (Input.GetKey(KeyCode.J) && !IsGrounded)
+        {
+            if (ComboCount == 0)
+            {
+                anim.SetBool("Attack", true);
+                anim.SetBool("Attack2", false);
+            }
+            else if(ComboCount == 1)
+            {
+                anim.SetBool("Attack2", true);
+                anim.SetBool("Attack", false);
+            }
+            else
+            {
+                anim.SetBool("Attack2", false);
+                anim.SetBool("Attack", false);
+                ComboCount = 0;
+            }
+                
         }
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
@@ -90,5 +119,10 @@ public class Player : Photon.MonoBehaviour
             IsGrounded = false;
             anim.SetBool("isJumping", false);
         }
+    }
+    [PunRPC]
+    private void Attack()
+    {
+        ComboCount++;
     }
 }

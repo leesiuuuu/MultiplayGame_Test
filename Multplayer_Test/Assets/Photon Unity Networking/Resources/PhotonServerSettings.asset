@@ -52,4 +52,5 @@ MonoBehaviour:
   - EndJump
   - SetRunning
   - StartJump
+  - Attack
   DisableAutoOpenWizard: 1
