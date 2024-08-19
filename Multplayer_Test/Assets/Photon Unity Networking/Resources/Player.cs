@@ -52,7 +52,7 @@ public class Player : Photon.MonoBehaviour
         {
             photonView.RPC("Jump", PhotonTargets.AllBuffered);
         }
-        if (IsGrounded)
+        if (IsGrounded && Input.GetKey(KeyCode.Space))
         {
             anim.SetBool("isJumping", true);
         }

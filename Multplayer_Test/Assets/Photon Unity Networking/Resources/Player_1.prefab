@@ -478,7 +478,7 @@ MonoBehaviour:
   sr: {fileID: 2745331335672212256}
   PlayerNameText: {fileID: 1162333612594678096}
   IsGrounded: 0
-  MoveSpeed: 5
+  MoveSpeed: 10
   JumpForce: 300
 --- !u!114 &1955731597708537660
 MonoBehaviour:
@@ -647,6 +647,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: Attack2
+  - Type: 4
+    SynchronizeType: 1
+    Name: isJumping
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
