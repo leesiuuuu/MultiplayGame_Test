@@ -1,2 +1,2 @@
 # This is My Multiplay Game
-<img src="RepoImg/animation idle_edited.gif">
+<img src="RepoImg/animation idle_edited.gif" />
