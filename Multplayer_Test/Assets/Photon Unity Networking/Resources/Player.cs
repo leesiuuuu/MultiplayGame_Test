@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +19,7 @@ public class Player : Photon.MonoBehaviour
     public float JumpForce;
 
     private int ComboCount = 0;
+    private bool isMoveing = false;
     private void Awake()
     {
         if (photonView.isMine)
@@ -66,7 +67,7 @@ public class Player : Photon.MonoBehaviour
         {
             anim.SetBool("isJumping", true);
         }
-        if (Input.GetKey(KeyCode.J) && !IsGrounded)
+        if (Input.GetKey(KeyCode.J) && !IsGrounded && !isMoveing)
         {
             if (ComboCount == 0)
             {
@@ -82,10 +83,12 @@ public class Player : Photon.MonoBehaviour
         }
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
+            isMoveing = true;
             anim.SetBool("isRunning", true);
         }
         else
         {
+            isMoveing = false;
             anim.SetBool("isRunning", false);
         }
     }
@@ -122,5 +125,14 @@ public class Player : Photon.MonoBehaviour
             ++ComboCount;
         else
             --ComboCount;
+    }
+    [PunRPC]
+    private void RbUpdate()
+    {
+        float rbVelo = rb.velocity.y;
+        if(rbVelo - rb.velocity.y > 0)
+        {
+            anim.SetBool("isFalling", true);
+        }
     }
 }

@@ -53,4 +53,5 @@ MonoBehaviour:
   - SetRunning
   - StartJump
   - Attack
+  - RbUpdate
   DisableAutoOpenWizard: 1
