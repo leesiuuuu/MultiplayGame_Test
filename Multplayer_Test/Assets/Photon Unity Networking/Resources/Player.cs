@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Player : Photon.MonoBehaviour
 {
@@ -69,17 +69,19 @@ public class Player : Photon.MonoBehaviour
         }
         if (Input.GetKey(KeyCode.J) && !IsGrounded && !isMoveing)
         {
-            if (ComboCount == 0)
-            {
-                anim.SetTrigger("Attack2");
-                anim.ResetTrigger("Attack1");
-            }
-            else
+            if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
             {
                 anim.SetTrigger("Attack1");
+            }
+            if(anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            {
+                anim.ResetTrigger("Attack1");
+                anim.SetTrigger("Attack2");
+            }
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
+            {
                 anim.ResetTrigger("Attack2");
             }
-                
         }
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
@@ -130,7 +132,7 @@ public class Player : Photon.MonoBehaviour
     private void RbUpdate()
     {
         float rbVelo = rb.velocity.y;
-        if(rbVelo - rb.velocity.y > 0)
+        if (rbVelo - rb.velocity.y > 0)
         {
             anim.SetBool("isFalling", true);
         }

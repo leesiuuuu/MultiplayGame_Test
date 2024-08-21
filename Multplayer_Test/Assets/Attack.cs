@@ -7,7 +7,10 @@ public class Attack : MonoBehaviour
     public Animator animator;
     public void EndAttack1Animation()
     {
-        animator.ResetTrigger("Attack1");
-        animator.ResetTrigger("Attack2");
+        animator.SetBool("IsAttack", false);
+    }
+    public void StartAttackCount()
+    {
+        animator.SetBool("IsAttack", true);
     }
 }
